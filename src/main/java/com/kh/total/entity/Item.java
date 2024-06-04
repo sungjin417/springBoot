@@ -3,11 +3,13 @@ package com.kh.total.entity;
 import com.kh.total.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 @Getter
 @Setter
+@ToString
 @Entity // JPA Entity 클래스 임을 지정, Entity 클래스는 반드시 기본키를 가져야 함
 public class Item {
     @Id
