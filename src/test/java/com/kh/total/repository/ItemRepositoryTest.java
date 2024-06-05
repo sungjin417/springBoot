@@ -2,6 +2,7 @@ package com.kh.total.repository;
 
 import com.kh.total.constant.ItemSellStatus;
 import com.kh.total.entity.Item;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@Slf4j
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 class ItemRepositoryTest {
@@ -87,5 +88,19 @@ class ItemRepositoryTest {
         this.createItemTest();
         List<Item> itemList = itemRepository.findByItemNmContaining("상품3");
         for (Item e : itemList) System.out.println(e.toString());
+    }
+    @Test
+    @DisplayName("@Query를 이용한 검색 기능 구현")
+    public void findByItemDetailTest() {
+        this.createItemTest();
+        List<Item> itemList = itemRepository.findByItemDetail("설명6");
+        for(Item e : itemList) log.info(e.toString());
+    }
+    @Test
+    @DisplayName("@Query를 이용한 검색 기능 구현")
+    public void findByItemDetailTest2() {
+        this.createItemTest();
+        List<Item> itemList = itemRepository.findByItemDetailByNative("설명6");
+        for(Item e : itemList) log.info(e.toString());
     }
 }
