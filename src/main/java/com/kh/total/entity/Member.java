@@ -1,8 +1,7 @@
 package com.kh.total.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.kh.total.constant.Authority;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +11,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+
+@NoArgsConstructor
 public class Member {
     @Id
     @Column(name = "member_id")
@@ -23,5 +24,16 @@ public class Member {
     private String email;
     private String image;
     private LocalDateTime regDate;
+    @Enumerated(EnumType.STRING) // 디비에 문자열 자체가 저장
+    private Authority authority;
+    @Builder
+    public Member(String name, String pwd, String email, String image, Authority authority) {
+        this.name = name;
+        this.pwd = pwd;
+        this.email = email;
+        this.image = image;
+        this.authority = authority;
+        this.regDate = LocalDateTime.now();
+    }
 
 }
