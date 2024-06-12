@@ -43,6 +43,8 @@ public class TokenProvider {
 
 
         Date tokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        Date refreshTokenExpiresIn = new Date(now + REFRESH_TOKEN_EXPIRE_TIME);
+
 
         System.out.println(tokenExpiresIn);
 
@@ -54,6 +56,12 @@ public class TokenProvider {
                 .compact();
 
         // 리플레쉬 토큰 추가 (아래 추가하면 됨)
+
+        // 리프레시 토큰 생성
+        String refreshToken = io.jsonwebtoken.Jwts.builder()
+                .setExpiration(refreshTokenExpiresIn)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
 
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)
