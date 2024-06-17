@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -25,5 +27,14 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody MemberReqDto requestDto) {
         return ResponseEntity.ok(authService.login(requestDto));
+    }
+    @PostMapping("/python")
+    public String pythonInput(@RequestBody Map<String, String> data) {
+        String id = data.get("id");
+        String pwd = data.get("pwd");
+
+        System.out.println("ID: " + id);
+        System.out.println("PWD : " + pwd);
+        return "ID : " + id + ", PWD : " + pwd;
     }
 }
